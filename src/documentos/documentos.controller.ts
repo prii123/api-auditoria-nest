@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Put } from '@nestjs/common/decorators';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DocumentosService } from './documentos.service';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
@@ -8,6 +9,16 @@ import { CreateDocumentoDto } from './dto/create-documento.dto';
 @Controller('documentos')
 export class DocumentosController {
   constructor(private readonly documentosService: DocumentosService) {}
+
+  @Get('/tipo-documentos')
+  consultaTipoDocumentos(){
+    return this.documentosService.tipoDeDocumentos()
+  }
+
+  @Get('/numero-por-cada-documento/:periodo/:empresaId')
+  contarCantidadDeDocumentosXPeriodoXEmpresa(@Param('periodo') periodo: string, @Param('empresaId') empresaId: string){
+    return this.documentosService.cantidaPorDocumentos(periodo, empresaId)
+  }
 
   @Post()
   create(@Body() createDocumentoDto: CreateDocumentoDto[]) {
@@ -26,7 +37,7 @@ export class DocumentosController {
 
   @Delete(':periodo/:tipoDoc/:empresaId')
   removeDocumentos(@Param('periodo') periodo: string, @Param('tipoDoc') tipoDoc: string, @Param('empresaId') empresaId: string) {
-    return this.documentosService.findAllByPeriodoTipoDocEmpresaId(periodo, tipoDoc, empresaId);
+    return this.documentosService.removeDocumentos(periodo, tipoDoc, empresaId);
   }
 
   @Delete(':id')
@@ -34,6 +45,10 @@ export class DocumentosController {
     return this.documentosService.remove(id);
   }
 
+  @Patch(':id')
+  actualizarHallazgoDocumento(@Param('id') id: number, @Body() update: any) {
+    return this.documentosService.actualizarHa(id, update);
+  }
 
 
 

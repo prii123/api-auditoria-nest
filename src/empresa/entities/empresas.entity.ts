@@ -1,4 +1,5 @@
 import { DocumentoEntity } from "src/documentos/entities/documento.entity";
+import { TotalesRetencionFuente } from "src/impuestos/retencion-fuente/entities/totales-retencion.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'empresas' })
@@ -28,8 +29,17 @@ export class EmpresasEntity {
     @Column()
     autorrenta: number;
 
+    @Column()
+    creadorId: number;
+
     @OneToMany(() => DocumentoEntity, (documento) => documento.empresa)
     documentos: DocumentoEntity[]
+
+    @OneToMany(() => TotalesRetencionFuente, (empresa) => empresa.empresa)
+    empresa: TotalesRetencionFuente[]
+
+    // @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
+    // empresa: EmpresasEntity;
 
     // createdAt: Date;
 }

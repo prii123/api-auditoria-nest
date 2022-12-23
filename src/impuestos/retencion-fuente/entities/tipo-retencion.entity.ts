@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TotalesRetencionFuente } from './totales-retencion.entity'
+import { DetalleRetencionFuente } from './retencion-fuente.entity'
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'tipo_retencion'})
 export class TipoRetencionFuente {
@@ -9,7 +11,11 @@ export class TipoRetencionFuente {
     @Column()
     readonly concepto: string;
 
+    @OneToOne(() => TotalesRetencionFuente, (empresa) => empresa.tiporetencion)
+    tipoRet: TotalesRetencionFuente;
 
+    @OneToOne(() => DetalleRetencionFuente, (retencion) => retencion.tiporetencion)
+    tipoRete: DetalleRetencionFuente;
 
 
 }

@@ -11,7 +11,7 @@ export class HallazgosController {
   constructor(private readonly hallazgosService: HallazgosService) {}
 
   @Post()
-  create(@Body() createHallazgoDto: CreateHallazgoDto) {
+  consultarPeriodos(@Body() createHallazgoDto: CreateHallazgoDto) {
     return this.hallazgosService.create(createHallazgoDto);
   }
 
@@ -25,6 +25,21 @@ export class HallazgosController {
     return this.hallazgosService.findOne(+id);
   }
 
+  @Get('/documento-id/:id')
+  findOnePorDocumentoId(@Param('id') id: number) {
+    return this.hallazgosService.buscaPorDocumentoId(+id);
+  }
+
+  @Get(':periodo/:empresaId')
+  searchByPeriodoAndEmpresaId(@Param('periodo') periodo: string, @Param('empresaId') empresaId: number){
+    return this.hallazgosService.findByEmpresaidAndPeriodo(empresaId, periodo)
+  }
+
+  @Get('generales/:periodo/:empresaId')
+  searchByPeriodoAndEmpresaIdGenerales(@Param('periodo') periodo: string, @Param('empresaId') empresaId: number){
+    return this.hallazgosService.findByEmpresaidAndPeriodoGenerales(empresaId, periodo)
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateHallazgoDto: UpdateHallazgoDto) {
     return this.hallazgosService.update(+id, updateHallazgoDto);
@@ -34,4 +49,6 @@ export class HallazgosController {
   remove(@Param('id') id: number) {
     return this.hallazgosService.remove(+id);
   }
+
+  
 }

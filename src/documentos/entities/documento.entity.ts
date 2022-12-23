@@ -1,5 +1,6 @@
 import { EmpresasEntity } from "src/empresa/entities/empresas.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { DetalleRetencionFuente } from "src/impuestos/retencion-fuente/entities/retencion-fuente.entity";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'documento' })
 export class DocumentoEntity {
@@ -40,7 +41,13 @@ export class DocumentoEntity {
     @Column()
     empresaId: number;
 
+    @Column()
+    hallazgo: number;
+
     @ManyToOne(()=> EmpresasEntity, (empresa) => empresa.documentos)
     empresa: EmpresasEntity;
+
+    @OneToOne(() => DetalleRetencionFuente, (doc) => doc.documento)
+    documento: DetalleRetencionFuente;
 
 }

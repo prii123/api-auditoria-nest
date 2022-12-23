@@ -1,16 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { EmpresasEntity } from "src/empresa/entities/empresas.entity";
+import { TipoRetencionFuente } from './tipo-retencion.entity'
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'totales_retencion'})
+@Entity({ name: 'totales_retencion' })
 export class TotalesRetencionFuente {
 
     @PrimaryGeneratedColumn()
     readonly id: number
 
     @Column()
-    readonly tiporetencionId: string;
+    readonly tiporetencionId: number;
 
     @Column()
-    readonly empresaId: string;
+    readonly empresaId: number;
 
     @Column()
     readonly periodo: string;
@@ -20,6 +22,13 @@ export class TotalesRetencionFuente {
 
     @Column()
     valor: string;
+
+    @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
+    empresa: EmpresasEntity;
+
+    @OneToOne(() => TipoRetencionFuente)
+    @JoinColumn()
+    tiporetencion: TipoRetencionFuente;
 
 
 }

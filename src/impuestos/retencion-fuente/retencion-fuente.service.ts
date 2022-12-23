@@ -7,6 +7,7 @@ import { DetalleRetencionFuente } from './entities/retencion-fuente.entity';
 import { TipoRetencionFuente } from './entities/tipo-retencion.entity';
 import { DocumentoEntity } from '../../documentos/entities/documento.entity'
 import { TotalesRetencionFuente } from './entities/totales-retencion.entity';
+import { EmpresasEntity } from 'src/empresa/entities/empresas.entity';
 
 @Injectable()
 export class RetencionFuenteService {
@@ -29,7 +30,7 @@ export class RetencionFuenteService {
     return this.detalleReteaRepo.save(newdetallerR);
   }
 
-  async busquedaRetencionesGuardadas(empresaId: string, periodo: string) {
+  async busquedaRetencionesGuardadas(empresaId: number, periodo: string) {
     const retencionesEnDocumento = await this.documentos.manager
       .getRepository(DocumentoEntity)
       .createQueryBuilder("documento")
@@ -67,43 +68,54 @@ export class RetencionFuenteService {
   }
 
 
-  async generarTotalesRetencion(empresaId: string, periodo: string) {
+  async generarTotalesRetencion(empresaId: number, periodo: string) {
     /**
      * esta primera consulta trae los detalles de las retenciones guardadas
      * el cual se sumaran y formaran los totales para generar el formulario 350
      * formulaio de retencion en la fuente
      */
-    const result = await this.detalleReteaRepo.manager
-      .getRepository(DetalleRetencionFuente)
-      .createQueryBuilder("detalle_retencion")
-      .where("detalle_retencion.empresaId = :empresaId", { empresaId })
-      .andWhere("detalle_retencion.periodo = :periodo", { periodo })
-      .getMany()
+    let query1 = "SELECT * FROM detalle_retencion WHERE empresaId = " + empresaId + " AND periodo = '" + periodo + "'"
+    const result = await this.detalleReteaRepo.query(query1)
+    // .manager
+    // .getRepository(DetalleRetencionFuente)
+    // .createQueryBuilder("detalle_retencion")
+    // .where("detalle_retencion.empresaId = :empresaId", { empresaId })
+    // .andWhere("detalle_retencion.periodo = :periodo", { periodo })
+    // .getMany()
+    
 
     /**
        * esta segunda consulta es para traer todas las ventas del periodo que sean electronicas
        * con lo cual se calculara la autorretencion en renta
        */
     // FACTURACION
-    const ventas = await this.documentos.manager
-      .getRepository(DocumentoEntity)
-      .createQueryBuilder("documento")
-      .leftJoinAndSelect("documento.empresa", "empresas.documentos")
-      .where("documento.empresaId = :empresaId", { empresaId })
-      .andWhere("documento.periodo = :periodo", { periodo })
-      .andWhere("tipoDoc = 2")
-      .andWhere("documento.numeroFE IS NOT NULL")
-      .getMany()
+    let query2 = "SELECT empresas.autorrenta, documento.*, empresas.razonSocial FROM empresas, documento WHERE empresas.id = documento.empresaId AND documento.numeroFE IS NOT NULL AND documento.empresaId = " + empresaId + " AND documento.periodo = '" + periodo + "' AND tipoDoc = 2"
+    const ventas = await this.documentos.query(query2)
+    // .manager
+    // .getRepository(DocumentoEntity)
+    // .createQueryBuilder("documento")
+    // .leftJoinAndSelect("documento.empresa", "empresas.documentos")
+    // .where("documento.empresaId = :empresaId", { empresaId })
+    // .andWhere("documento.periodo = :periodo", { periodo })
+    // .andWhere("tipoDoc = 2")
+    // .andWhere("documento.numeroFE IS NOT NULL")
+    // .getMany()
+
+    
+
     // NOTA CREDITO
-    const notaCredito = await this.documentos.manager
-      .getRepository(DocumentoEntity)
-      .createQueryBuilder("documento")
-      .leftJoinAndSelect("documento.empresa", "empresas.documentos")
-      .where("documento.empresaId = :empresaId", { empresaId })
-      .andWhere("documento.periodo = :periodo", { periodo })
-      .andWhere("tipoDoc = 3")
-      .andWhere("documento.numeroFE IS NOT NULL")
-      .getMany()
+    let query3 = "SELECT empresas.autorrenta, documento.*, empresas.razonSocial FROM empresas, documento WHERE empresas.id = documento.empresaId AND documento.numeroFE IS NOT NULL AND documento.empresaId = " + empresaId + " AND documento.periodo = '" + periodo + "' AND tipoDoc = 3"
+    const notaCredito = await this.documentos.query(query3)
+    // .manager
+    // .getRepository(DocumentoEntity)
+    // .createQueryBuilder("documento")
+    // .leftJoinAndSelect("documento.empresa", "empresas.documentos")
+    // .where("documento.empresaId = :empresaId", { empresaId })
+    // .andWhere("documento.periodo = :periodo", { periodo })
+    // .andWhere("tipoDoc = 3")
+    // .andWhere("documento.numeroFE IS NOT NULL")
+    // .getMany()
+    
 
     //  CALCULO DE AUTORRENTA Y RETENCIONES
     var autorrenta = 0;
@@ -131,9 +143,10 @@ export class RetencionFuenteService {
 
     autorrentaBase = baseAutorrentaSumas - baseNotaCredito;
 
-    autorrenta = Math.round((autorrentaBase * ventas[0]?.empresa?.autorrenta) / 100);
+    autorrenta = Math.round((autorrentaBase * ventas[0]?.autorrenta) / 100);
 
-    // console.log(notaCredito);
+    // console.log(ventas[0]?.empresa?.autorrenta);
+    // console.log(ventas[0]);
     // console.log(baseAutorrentaSumas + "  -  " + baseNotaCredito);
     // console.log(autorrenta);
     // console.log(autorrentaBase);
@@ -157,10 +170,11 @@ export class RetencionFuenteService {
       //     base += ret.base;
       //   }
       // });
-      for (let i = 0; i < result.length; i++) {
-        if (result[i].tiporetencionId === i) {
-          retencion += result[i].valor;
-          base += result[i].base;
+      for (let ii = 0; ii < result.length; ii++) {
+        if (result[ii].tiporetencionId === i) {
+          // console.log(result[ii].tiporetencionId)
+          retencion += result[ii].valor;
+          base += result[ii].base;
         }
       }
 
@@ -175,6 +189,7 @@ export class RetencionFuenteService {
         base: base,
         valor: retencion,
       };
+      // console.log(datoTotal)
 
       /**
        * en la iteracion se genera valores 0 por que no todo puede existir por se se hace
@@ -189,6 +204,8 @@ export class RetencionFuenteService {
       }
     }
 
+   
+
     var autoRent = {
       empresaId,
       periodo,
@@ -199,25 +216,27 @@ export class RetencionFuenteService {
 
     array.push(autoRent);
 
+  
+
     /**
      * Esto elimina todos los totales de la retencion para volver a generar y actualizar la tabla
     */
 
-
-    const borrar = await this.totalesRetencion
-      .createQueryBuilder('totales_retencion')
-      .delete()
-      .from(TotalesRetencionFuente)
-      .where("totales_retencion.empresaId = :empresaId", { empresaId })
-      .andWhere("totales_retencion.periodo = :periodo", { periodo })
-      .execute();
+    let query4 = "DELETE FROM totales_retencion WHERE empresaId = " + empresaId + " AND periodo = '" + periodo + "'"
+    const borrar = await this.totalesRetencion.query(query4)
+    // .createQueryBuilder('totales_retencion')
+    // .delete()
+    // .from(TotalesRetencionFuente)
+    // .where("totales_retencion.empresaId = :empresaId", { empresaId })
+    // .andWhere("totales_retencion.periodo = :periodo", { periodo })
+    // .execute();
 
     /**
      * Aqui Vuelvre a guardar las retenciones en los totales
      * listas para generar el reporte formulario 350 de la DIAN
     */
 
-
+    // console.log(array)
     await this.totalesRetencion
       .createQueryBuilder()
       .insert()
@@ -228,6 +247,51 @@ export class RetencionFuenteService {
 
     return true
   }
+
+  async consultaTotalesRetencion(empresaId: number, periodo: string) {
+
+    if (!empresaId || !periodo) return 'no hay informacion';
+
+    // const totales_retenciones = await this.totalesRetencion.find({
+    //   relations: ['empresa', 'tiporetencion'], where: {
+    //     empresaId: empresaId,
+    //     periodo: periodo,
+    //   },
+    // });
+    let query = "SELECT totales_retencion.*, empresas.razonSocial, empresas.nit, empresas.digitoVerificacion FROM totales_retencion, empresas WHERE empresas.id = totales_retencion.empresaId AND empresaId = " + empresaId + " AND periodo = '" + periodo + "'"
+    const totales_retenciones = await this.totalesRetencion.query(query)
+    return totales_retenciones;
+
+
+  }
+
+  async consultaAnexoRetencion(empresaId: number, periodo: string) {
+
+    if (!empresaId || !periodo) return 'no hay informacion';
+
+    const totales_retenciones = await this.detalleReteaRepo.find({
+      relations: ['empresa', 'documento', 'tiporetencion'], where: {
+        empresaId: empresaId,
+        periodo: periodo,
+      },
+    });
+
+
+
+
+    // tipo_retencion
+    return totales_retenciones;
+
+  }
+
+
+  async removeByDocumentoId(id: any) {
+    let query = "DELETE FROM detalle_retencion WHERE (documentoId = "+id+");"
+    await this.totalesRetencion.query(query);
+    return true;
+  }
+
+
 
 
 

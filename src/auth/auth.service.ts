@@ -1,22 +1,22 @@
-// import { ClientProxy } from '@nestjs/microservices';
-// import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Injectable, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareHash, generateHash } from './utils/handleBcrypt';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
-import { UsersEntity } from '../usuario/entities/usuario.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UsersEntity } from '../usuario/entities/usuario.entity';
+
+
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    // private readonly eventEmitter: EventEmitter2,
     @InjectRepository(UsersEntity) private readonly userModel: Repository<UsersEntity>,
     // @Inject('MAIL_SERVICE') private readonly clientMailService:ClientProxy
   ) { }
+
 
   /**
    * Iniciar sesion
@@ -24,9 +24,14 @@ export class AuthService {
    * @returns
    */
   public async login(userLoginBody: LoginAuthDto) {
+
     const { password, email }: any = userLoginBody;
 
-    const userExist = await this.userModel.findOne(email);
+    // console.log(password)
+    // const userExist = await this.userModel.findOne(email);
+    let query = "SELECT * FROM usuarios WHERE email = '"+email+"' "
+    const [userExist] = await this.userModel.query(query)
+    // console.log(userExist)
 
     if (!userExist) throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
 

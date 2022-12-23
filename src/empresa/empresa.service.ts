@@ -13,7 +13,7 @@ export class EmpresaService {
     constructor( @InjectRepository(EmpresasEntity) private empresaRepo: Repository<EmpresasEntity> ) { }
 
 
-    async create(createEmpresaDto: EmpresaDTO) {
+    async create(createEmpresaDto: EmpresaDTO, usuario_registrado:number) {
         const newUsers = this.empresaRepo.create(createEmpresaDto)
         // newUsers.nit = createEmpresaDto.nit;
         // newUsers.razonSocial = createEmpresaDto.razonSocial;
@@ -21,7 +21,8 @@ export class EmpresaService {
         // newUsers.direccion = createEmpresaDto.direccion;
         // newUsers.ciudad = createEmpresaDto.ciudad;
         // newUsers.logo = createEmpresaDto.logo;
-        // newUsers.autorrenta = createEmpresaDto.autorrenta;
+        newUsers.creadorId = usuario_registrado;
+        console.log(newUsers)
         return this.empresaRepo.save(newUsers);
     }
 
@@ -32,13 +33,17 @@ export class EmpresaService {
 
     async findOne(id: any) {
         // if (!mongoose.Types.ObjectId.isValid(id)) throw new NotFoundException('El usuario no existe.');
-        const user = await this.empresaRepo.findOneBy(id);
-        return user;
+        let query = "SELECT * FROM empresas where id = "+id+""
+        const empresa = await this.empresaRepo.query(query)
+        return empresa;
     }
 
     async update(id: any, createEmpresaDto: EmpresaDTO) {
-        const user = await this.empresaRepo.findOneBy(id);
-        this.empresaRepo.merge(user, createEmpresaDto);
+        // console.log(id)
+        // console.log(createEmpresaDto)
+        let query = "SELECT * FROM empresas WHERE id = "+id+""
+        const user = await this.empresaRepo.query(query);
+        this.empresaRepo.merge(user[0], createEmpresaDto);
         return this.empresaRepo.save(user);
 
     }

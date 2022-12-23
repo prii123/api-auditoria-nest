@@ -16,13 +16,23 @@ export class RetencionFuenteController {
   }
 
   @Get(':empresaId/:periodo')
-  findAll(@Param('empresaId') empresaId: string, @Param('periodo') periodo: string) {
+  findAll(@Param('empresaId') empresaId: number, @Param('periodo') periodo: string) {
     return this.retencionFuenteService.busquedaRetencionesGuardadas(empresaId, periodo);
   }
 
-  @Get('totales-retencion/:empresaId/:periodo')
-  totalesRetenciones(@Param('empresaId') empresaId: string, @Param('periodo') periodo: string) {
+  @Get('totales-retencion-actualizar/:empresaId/:periodo')
+  totalesRetenciones(@Param('empresaId') empresaId: number, @Param('periodo') periodo: string) {
     return this.retencionFuenteService.generarTotalesRetencion(empresaId, periodo);
+  }
+
+  @Get('totales-retencion/:empresaId/:periodo')
+  consultaTotalesRetencion(@Param('empresaId') empresaId: number, @Param('periodo') periodo: string) {
+    return this.retencionFuenteService.consultaTotalesRetencion(empresaId, periodo);
+  }
+
+  @Get('anexo-retencion/:empresaId/:periodo')
+  consultaAnexoRetencion(@Param('empresaId') empresaId: number, @Param('periodo') periodo: string) {
+    return this.retencionFuenteService.consultaAnexoRetencion(empresaId, periodo);
   }
 
   @Get('/tipos')
@@ -43,5 +53,10 @@ export class RetencionFuenteController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.retencionFuenteService.remove(+id);
+  }
+
+  @Delete('documentoId/:id')
+  removeByDocimentoId(@Param('id') id: number) {
+    return this.retencionFuenteService.removeByDocumentoId(+id);
   }
 }

@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, UseGuards, Request } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/strategy/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UsersEntity } from './entities/usuario.entity';
 
 
 @ApiBearerAuth()
@@ -12,11 +13,13 @@ import { JwtAuthGuard } from '../auth/strategy/jwt-auth.guard';
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) { }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('/active')
-  findActive(@Req() req) {
-    const {_id, name, email, foto, createdAt} = req.user
-    return {_id, name, email, foto, createdAt}
+  findActive(@Request() req) {
+    // console.log(req.user)
+    const usuario = this.findOne(req.user)
+
+    return usuario
   }
 
   // @UseGuards(JwtAuthGuard)
@@ -26,7 +29,7 @@ export class UsuarioController {
   // }
 
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('/')
   async findAll(@Res() res) {
     const usuarios = await this.usuarioService.findAll();

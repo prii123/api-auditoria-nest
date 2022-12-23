@@ -4,6 +4,7 @@ import { HallazgosController } from './hallazgos.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Hallazgo } from './entities/hallazgo.entity';
 
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([Hallazgo])

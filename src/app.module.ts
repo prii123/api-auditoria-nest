@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module'
 import { DocumentosModule } from './documentos/documentos.module';
 import { HallazgosModule } from './hallazgos/hallazgos.module';
 import { RetencionFuenteModule } from './impuestos/retencion-fuente/retencion-fuente.module';
+import { InformesModule } from './informes/informes.module';
 
 
 @Module({
@@ -27,7 +28,8 @@ import { RetencionFuenteModule } from './impuestos/retencion-fuente/retencion-fu
     UsuarioModule,
     DocumentosModule,
     HallazgosModule,
-    RetencionFuenteModule
+    RetencionFuenteModule,
+    InformesModule
   ],
   controllers: [AppController],
   providers: [AppService],

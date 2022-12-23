@@ -6,17 +6,17 @@ export class Hallazgo {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @Column()
+    @Column()
     documentoId: string;
 
-    // @Column()
+    @Column()
     tipodocumentoId: string;
 
     @Column()
     hallazgo: string;
 
-    // @Column()
-    accioncorrectiva: string;
+    @Column()
+    accionCorrectiva: string;
 
     @Column()
     empresaId: number;
