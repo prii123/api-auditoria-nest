@@ -29,7 +29,7 @@ export class AuthService {
 
     // console.log(password)
     // const userExist = await this.userModel.findOne(email);
-    let query = "SELECT * FROM usuarios WHERE email = '"+email+"' "
+    let query = "SELECT * FROM usuarios WHERE email = '" + email + "' "
     const [userExist] = await this.userModel.query(query)
     // console.log(userExist)
 
@@ -72,10 +72,6 @@ export class AuthService {
     };
 
     const newUser = await this.userModel.create(userParse);
-
-    /** 
-     * Enviar (evento) de email
-     */
 
     return this.userModel.save(newUser);
   }

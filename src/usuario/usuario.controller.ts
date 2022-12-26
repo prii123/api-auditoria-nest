@@ -16,17 +16,26 @@ export class UsuarioController {
   @UseGuards(JwtAuthGuard)
   @Get('/active')
   findActive(@Request() req) {
-    // console.log(req.user)
     const usuario = this.findOne(req.user)
-
     return usuario
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Post()
-  // create(@Body() createUsuarioDto: CreateUsuarioDto) {
-  //   return this.usuarioService.create(createUsuarioDto);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Get('/tipo-usuario')
+  async findTipeUserr() {
+    const usuario = await this.usuarioService.findTipeUser()
+    return usuario
+  }
+
+
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/')
+  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+    return this.usuarioService.create(createUsuarioDto);
+  }
+
+
 
 
   @UseGuards(JwtAuthGuard)
