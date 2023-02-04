@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, Use
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { CrearFirmaDTO } from './dto/crear-firmas.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UsersEntity } from './entities/usuario.entity';
@@ -11,7 +12,9 @@ import { UsersEntity } from './entities/usuario.entity';
 @ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) { }
+  constructor(
+    private readonly usuarioService: UsuarioService
+  ) { }
 
   @UseGuards(JwtAuthGuard)
   @Get('/active')
@@ -48,21 +51,23 @@ export class UsuarioController {
     })
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.usuarioService.findOne(+id);
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch('actualiza-datos/:id')
   update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.usuarioService.remove(+id);
   }
+
+
 }

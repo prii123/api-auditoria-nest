@@ -1,8 +1,10 @@
 import { Injectable, NotFoundException, Req } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { CrearFirmaDTO } from './dto/crear-firmas.dto';
 import { UsersEntity } from './entities/usuario.entity';
 import { TipoUsersEntity } from './entities/tipoUsuario.entity';
+import { FirmasEntity } from './entities/firmas.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -13,7 +15,8 @@ import { generateHash } from '../auth/utils/handleBcrypt'
 export class UsuarioService {
   constructor(
     @InjectRepository(UsersEntity) private usersRepo: Repository<UsersEntity>,
-    @InjectRepository(TipoUsersEntity) private tipoUsersRepo: Repository<TipoUsersEntity>
+    @InjectRepository(TipoUsersEntity) private tipoUsersRepo: Repository<TipoUsersEntity>,
+    @InjectRepository(FirmasEntity) private firmasRepo: Repository<FirmasEntity>
   ) { }
 
   async create(createUsuarioDto: CreateUsuarioDto) {
@@ -50,6 +53,9 @@ export class UsuarioService {
     await this.usersRepo.delete(id);
     return true;
   }
+
+
+
 }
 
 
