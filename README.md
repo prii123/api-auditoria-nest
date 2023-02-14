@@ -6,27 +6,8 @@ $ npm install
 ```
 
 ## Running the app
+- para construir la imagen de docker
+$ docker build -t api/audit-nest .
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+- para correr la imagen en un contenedor de docker
+$ docker run --name api-auditorias -p 4000:4000 -d api/audit-nest
