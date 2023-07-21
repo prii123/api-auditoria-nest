@@ -15,10 +15,10 @@ import { InformesModule } from './informes/informes.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'db-mysql-auditorias-do-user-12795625-0.b.db.ondigitalocean.com',
-      port: 25060,
-      username: 'doadmin',
-      password: 'AVNS_fCAKMaPW24A5InGSp1T',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
       database: 'auditoria',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false,

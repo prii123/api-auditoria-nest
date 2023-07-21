@@ -19,13 +19,15 @@ export class InformesService {
   ) { }
 
   async consultarPeriodosPorEmpresa(empresaId: number) {
-    console.log(empresaId)
+    // console.log(empresaId)
     let query = "SELECT DISTINCT periodo FROM documento WHERE empresaId = " + empresaId + " ORDER BY periodo DESC"
     const users = await this.documento.query(query)
     return users;
   }
 
   async consultaHallazgos(empresaId: number, periodo: string) {
+    console.log(empresaId + " - "+ periodo)
+
     let query = "SELECT documento.numeroDoc, hallazgoz_y_correcciones.tipodocumentoId, tipo_documentos.nombre, hallazgoz_y_correcciones.hallazgo, hallazgoz_y_correcciones.accionCorrectiva, documento.empresaId, documento.periodo, hallazgoz_y_correcciones.created_at FROM hallazgoz_y_correcciones, documento, tipo_documentos WHERE hallazgoz_y_correcciones.documentoId = documento.id AND hallazgoz_y_correcciones.tipodocumentoId = tipo_documentos.id AND documento.empresaId = " + empresaId + " AND documento.periodo = '" + periodo + "'";
     const users = await this.documento.query(query);
     return users;

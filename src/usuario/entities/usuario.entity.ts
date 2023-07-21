@@ -24,6 +24,7 @@ export class UsersEntity {
     @Column({ default: 2 })
     idRol: number;
 
-    // createdAt: Date;
+    createdAt: Date;
+
 }
 
