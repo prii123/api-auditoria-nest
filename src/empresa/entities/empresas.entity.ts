@@ -1,4 +1,4 @@
-import { DocumentoEntity } from "src/documentos/entities/documento.entity";
+import { DocumentoEntity } from "src/documentos/documento/entities/documento.entity";
 import { TotalesRetencionFuente } from "src/impuestos/retencion-fuente/entities/totales-retencion.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 

@@ -5,7 +5,7 @@ import { CreateDetalleRetencionFuenteDto } from './dto/detalle-retencion-fuente.
 import { UpdateRetencionFuenteDto } from './dto/update-retencion-fuente.dto';
 import { DetalleRetencionFuente } from './entities/retencion-fuente.entity';
 import { TipoRetencionFuente } from './entities/tipo-retencion.entity';
-import { DocumentoEntity } from '../../documentos/entities/documento.entity'
+import { DocumentoEntity } from '../../documentos/documento/entities/documento.entity'
 import { TotalesRetencionFuente } from './entities/totales-retencion.entity';
 import { EmpresasEntity } from 'src/empresa/entities/empresas.entity';
 

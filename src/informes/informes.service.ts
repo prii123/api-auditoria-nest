@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DocumentoEntity } from 'src/documentos/entities/documento.entity';
-import { TipoDocumentoEntity } from 'src/documentos/entities/tipodocumentos.entity';
+import { DocumentoEntity } from 'src/documentos/documento/entities/documento.entity';
+import { TipoDocumentoEntity } from 'src/documentos/documento/entities/tipodocumentos.entity';
 import { Informe } from './entities/informe.entity';
 import { Repository } from 'typeorm';
 import { CreateInformeDto } from './dto/create-informe.dto';

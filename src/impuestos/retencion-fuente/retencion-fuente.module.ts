@@ -4,7 +4,7 @@ import { RetencionFuenteController } from './retencion-fuente.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DetalleRetencionFuente } from './entities/retencion-fuente.entity';
 import { TipoRetencionFuente } from './entities/tipo-retencion.entity';
-import { DocumentoEntity } from 'src/documentos/entities/documento.entity';
+import { DocumentoEntity } from 'src/documentos/documento/entities/documento.entity';
 import {  TotalesRetencionFuente} from './entities/totales-retencion.entity'
 import { EmpresasEntity } from '../../empresa/entities/empresas.entity'
 

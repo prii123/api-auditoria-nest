@@ -1,4 +1,4 @@
-import { DocumentoEntity } from "src/documentos/entities/documento.entity";
+import { DocumentoEntity } from "src/documentos/documento/entities/documento.entity";
 import { EmpresasEntity } from "src/empresa/entities/empresas.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TipoRetencionFuente } from "./tipo-retencion.entity";
