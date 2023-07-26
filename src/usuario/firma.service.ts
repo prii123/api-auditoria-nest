@@ -41,9 +41,12 @@ export class FirmaService {
   }
 
   async updateFirma(id: any, crearFirmaDTO: CrearFirmaDTO) {
-    const user = await this.firmasRepo.findOneBy(id);
-    this.firmasRepo.merge(user, crearFirmaDTO);
-    return this.firmasRepo.save(user);
+    const firmaUpdate = await this.firmasRepo.findOneBy({id});
+    if (!firmaUpdate) {
+      return null; // O puedes lanzar una excepción o un mensaje de error aquí si lo deseas
+    }
+    Object.assign(firmaUpdate, crearFirmaDTO);
+    return await this.firmasRepo.save(firmaUpdate);
 
   }
 

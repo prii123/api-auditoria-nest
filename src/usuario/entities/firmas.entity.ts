@@ -16,6 +16,9 @@ export class FirmasEntity {
     cargo: string;
 
     @Column()
+    direccion: string;
+
+    @Column()
     telefono: string;
 
     @Column()

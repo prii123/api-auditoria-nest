@@ -42,4 +42,13 @@ export class FirmaController {
     return this.firmaService.consultarfirmasById(+id);
 
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  actualizarFirmaById(@Param('id') id : number, @Body() crearFirma: CrearFirmaDTO) {
+    return this.firmaService.updateFirma(id, crearFirma);
+
+  }
+
+  
 }

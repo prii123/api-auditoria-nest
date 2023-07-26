@@ -19,6 +19,11 @@ export class CrearFirmaDTO {
 
     @ApiProperty()
     @IsNotEmpty()
+    @Length(1 - 100)
+    readonly direccion: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
     readonly telefono: string;
 
     @ApiProperty()
