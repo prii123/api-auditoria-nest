@@ -34,9 +34,8 @@ export class FirmaService {
   }
 
   async consultarfirmasById(id: any) {
-    // const query = "SELECT * FROM firmas"
-    // console.log(query)
-    const firma = await this.firmasRepo.findBy(id)
+
+    const firma = await this.firmasRepo.findOneBy({id})
     return firma;
   }
 
