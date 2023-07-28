@@ -11,11 +11,11 @@ export class TipoRetencionFuente {
     @Column()
     readonly concepto: string;
 
-    @OneToOne(() => TotalesRetencionFuente, (empresa) => empresa.tiporetencion)
-    tipoRet: TotalesRetencionFuente;
+    // @OneToOne(() => TotalesRetencionFuente, (empresa) => empresa.tiporetencion)
+    // tipoRet: TotalesRetencionFuente;
 
-    @OneToOne(() => DetalleRetencionFuente, (retencion) => retencion.tiporetencion)
-    tipoRete: DetalleRetencionFuente;
+    // @OneToOne(() => DetalleRetencionFuente, (retencion) => retencion.tiporetencion)
+    // tipoRete: DetalleRetencionFuente;
 
 
 }

@@ -44,10 +44,10 @@ export class DocumentoEntity {
     @Column()
     hallazgo: number;
 
-    @ManyToOne(()=> EmpresasEntity, (empresa) => empresa.documentos)
-    empresa: EmpresasEntity;
+    // @ManyToOne(()=> EmpresasEntity, (empresa) => empresa.documentos)
+    // empresa: EmpresasEntity;
 
-    @OneToOne(() => DetalleRetencionFuente, (doc) => doc.documento)
-    documento: DetalleRetencionFuente;
+    // @OneToOne(() => DetalleRetencionFuente, (doc) => doc.documento)
+    // documento: DetalleRetencionFuente;
 
 }

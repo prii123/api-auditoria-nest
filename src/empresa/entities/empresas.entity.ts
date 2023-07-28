@@ -32,11 +32,11 @@ export class EmpresasEntity {
     @Column()
     creadorId: number;
 
-    @OneToMany(() => DocumentoEntity, (documento) => documento.empresa)
-    documentos: DocumentoEntity[]
+    // @OneToMany(() => DocumentoEntity, (documento) => documento.empresa)
+    // documentos: DocumentoEntity[]
 
-    @OneToMany(() => TotalesRetencionFuente, (empresa) => empresa.empresa)
-    empresa: TotalesRetencionFuente[]
+    // @OneToMany(() => TotalesRetencionFuente, (empresa) => empresa.empresa)
+    // empresa: TotalesRetencionFuente[]
 
     // @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
     // empresa: EmpresasEntity;

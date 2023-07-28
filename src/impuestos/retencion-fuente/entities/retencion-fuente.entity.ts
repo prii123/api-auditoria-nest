@@ -28,16 +28,16 @@ export class DetalleRetencionFuente {
     valor: number;
 
 
-    @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
-    empresa: EmpresasEntity;
+    // @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
+    // empresa: EmpresasEntity;
 
-    @OneToOne(() => TipoRetencionFuente)
-    @JoinColumn()
-    tiporetencion: TipoRetencionFuente;
+    // @OneToOne(() => TipoRetencionFuente)
+    // @JoinColumn()
+    // tiporetencion: TipoRetencionFuente;
 
-    @OneToOne(() => DocumentoEntity)
-    @JoinColumn()
-    documento: DocumentoEntity;
+    // @OneToOne(() => DocumentoEntity)
+    // @JoinColumn()
+    // documento: DocumentoEntity;
 
 
 }

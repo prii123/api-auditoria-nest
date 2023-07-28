@@ -23,12 +23,12 @@ export class TotalesRetencionFuente {
     @Column()
     valor: string;
 
-    @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
-    empresa: EmpresasEntity;
+    // @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
+    // empresa: EmpresasEntity;
 
-    @OneToOne(() => TipoRetencionFuente)
-    @JoinColumn()
-    tiporetencion: TipoRetencionFuente;
+    // @OneToOne(() => TipoRetencionFuente)
+    // @JoinColumn()
+    // tiporetencion: TipoRetencionFuente;
 
 
 }
