@@ -283,9 +283,13 @@ export class RetencionFuenteService {
     //let consulta = "SELECT *, documento.numeroFE, documento.numeroDoc FROM detalle_retencion, tipo_retencion, empresas, documento WHERE documento.id = detalle_retencion.documentoId AND empresas.id = detalle_retencion.empresaId AND tipo_retencion.id = detalle_retencion.tiporetencionId AND empresaId=" + empresaId + " AND periodo = '" + periodo + "'";
     let consulta = "SELECT *," +
       "(SELECT numeroFE FROM documento WHERE documento.id = detalle_retencion.documentoId) as numeroFE, " +
-      "(SELECT numeroDoc FROM documento WHERE documento.id = detalle_retencion.documentoId) as numeroDoc " +
+      "(SELECT numeroDoc FROM documento WHERE documento.id = detalle_retencion.documentoId) as numeroDoc, " +
+      "(SELECT nit FROM documento WHERE documento.id = detalle_retencion.documentoId) as nit, " +
+      "(SELECT razonSocial FROM documento WHERE documento.id = detalle_retencion.documentoId) as razonSocial, " +
+      "(SELECT nit FROM empresas WHERE empresas.id = detalle_retencion.empresaId) as nitEmpresa, " +
+      "(SELECT razonSocial FROM empresas WHERE empresas.id = detalle_retencion.empresaId) as razonSocialEmpresa " +
       "FROM detalle_retencion, tipo_retencion, empresas " +
-      "WHERE empresaId = "+empresaId+" AND periodo = '"+periodo+"' AND empresas.id = detalle_retencion.empresaId AND tipo_retencion.id = detalle_retencion.tiporetencionId"
+      "WHERE empresaId = "+empresaId+" AND periodo = '"+periodo+"' AND empresas.id = "+empresaId+" AND detalle_retencion.empresaId = "+empresaId+"  AND tipo_retencion.id = detalle_retencion.tiporetencionId"
     const totales_retenciones = await this.detalleReteaRepo.query(consulta);
 
     // tipo_retencion
