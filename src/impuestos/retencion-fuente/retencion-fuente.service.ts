@@ -13,10 +13,10 @@ import { EmpresasEntity } from 'src/empresa/entities/empresas.entity';
 export class RetencionFuenteService {
 
   constructor(
-    @InjectRepository(DetalleRetencionFuente) private detalleReteaRepo: Repository<DetalleRetencionFuente>,
-    @InjectRepository(TipoRetencionFuente) private tipoReteaRepo: Repository<TipoRetencionFuente>,
-    @InjectRepository(DocumentoEntity) private documentos: Repository<DocumentoEntity>,
-    @InjectRepository(TotalesRetencionFuente) private totalesRetencion: Repository<TotalesRetencionFuente>
+    @InjectRepository(DetalleRetencionFuente, 'operacion') private detalleReteaRepo: Repository<DetalleRetencionFuente>,
+    @InjectRepository(TipoRetencionFuente, 'operacion') private tipoReteaRepo: Repository<TipoRetencionFuente>,
+    @InjectRepository(DocumentoEntity, 'operacion') private documentos: Repository<DocumentoEntity>,
+    @InjectRepository(TotalesRetencionFuente, 'operacion') private totalesRetencion: Repository<TotalesRetencionFuente>
   ) { }
 
   async findAllTipodeRetencion() {

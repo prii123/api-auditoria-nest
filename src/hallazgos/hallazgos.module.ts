@@ -7,7 +7,7 @@ import { Hallazgo } from './entities/hallazgo.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Hallazgo])
+    TypeOrmModule.forFeature([Hallazgo], 'operacion')
   ],
   controllers: [HallazgosController],
   providers: [HallazgosService] 

@@ -10,8 +10,8 @@ import { TipoDocumentoEntity } from './entities/tipodocumentos.entity';
 @Injectable()
 export class DocumentosService {
   constructor(
-    @InjectRepository(DocumentoEntity) private empresaRepo: Repository<DocumentoEntity>,
-    @InjectRepository(TipoDocumentoEntity) private tipoDocumentoRepo: Repository<TipoDocumentoEntity>,
+    @InjectRepository(DocumentoEntity, 'operacion') private empresaRepo: Repository<DocumentoEntity>,
+    @InjectRepository(TipoDocumentoEntity, 'operacion') private tipoDocumentoRepo: Repository<TipoDocumentoEntity>,
   ) { }
 
 

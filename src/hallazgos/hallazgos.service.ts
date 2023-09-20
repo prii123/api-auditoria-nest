@@ -7,7 +7,7 @@ import { Hallazgo } from './entities/hallazgo.entity';
 
 @Injectable()
 export class HallazgosService {
-  constructor( @InjectRepository(Hallazgo) private hallazgosRepo: Repository<Hallazgo>) {}
+  constructor( @InjectRepository(Hallazgo, 'operacion') private hallazgosRepo: Repository<Hallazgo>) {}
 
 
   create(createHallazgoDto: CreateHallazgoDto) {

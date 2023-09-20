@@ -12,7 +12,7 @@ import { AuthModule } from '../auth/auth.module'
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UsersEntity, TipoUsersEntity, FirmasEntity])
+    TypeOrmModule.forFeature([UsersEntity, TipoUsersEntity, FirmasEntity], 'operacion')
   ],
   controllers: [UsuarioController, FirmaController],
   providers: [UsuarioService, AuthModule, FirmaService],

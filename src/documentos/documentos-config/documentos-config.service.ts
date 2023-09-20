@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class DocumentosConfigService {
 
   constructor(
-    @InjectRepository(DocumentosConfig) private docConfRepo: Repository<DocumentosConfig>,
+    @InjectRepository(DocumentosConfig, 'operacion') private docConfRepo: Repository<DocumentosConfig>,
 
   ) { }
 

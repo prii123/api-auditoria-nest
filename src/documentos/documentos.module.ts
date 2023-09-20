@@ -8,7 +8,7 @@ import { DocumentosConfigModule } from './documentos-config/documentos-config.mo
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([DocumentoEntity, TipoDocumentoEntity]),
+    TypeOrmModule.forFeature([DocumentoEntity, TipoDocumentoEntity], 'operacion'),
     DocumentosConfigModule
   ],
   controllers: [DocumentosController],

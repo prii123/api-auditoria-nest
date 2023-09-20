@@ -12,9 +12,9 @@ import { UsuarioService } from 'src/usuario/usuario.service';
 export class InformesService {
   constructor(
     private readonly usuario: UsuarioService,
-    @InjectRepository(DocumentoEntity) private documento: Repository<DocumentoEntity>,
-    @InjectRepository(TipoDocumentoEntity) private tipoDocumento: Repository<TipoDocumentoEntity>,
-    @InjectRepository(Informe) private informe: Repository<Informe>,
+    @InjectRepository(DocumentoEntity, 'operacion') private documento: Repository<DocumentoEntity>,
+    @InjectRepository(TipoDocumentoEntity, 'operacion') private tipoDocumento: Repository<TipoDocumentoEntity>,
+    @InjectRepository(Informe, 'operacion') private informe: Repository<Informe>,
 
   ) { }
 

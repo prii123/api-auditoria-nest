@@ -11,7 +11,7 @@ import { EmpresasEntity } from '../../empresa/entities/empresas.entity'
 @Module({
   imports: [
     TypeOrmModule.forFeature([DetalleRetencionFuente, TipoRetencionFuente, 
-      DocumentoEntity, TotalesRetencionFuente, EmpresasEntity])
+      DocumentoEntity, TotalesRetencionFuente, EmpresasEntity], 'operacion')
   ],
   controllers: [RetencionFuenteController],
   providers: [RetencionFuenteService]

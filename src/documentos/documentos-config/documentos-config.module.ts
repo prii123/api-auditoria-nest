@@ -6,7 +6,7 @@ import { DocumentosConfigController } from './documentos-config.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([DocumentosConfig]), // Agrega el Entity al módulo utilizando forFeature()
+    TypeOrmModule.forFeature([DocumentosConfig], 'operacion'), // Agrega el Entity al módulo utilizando forFeature()
   ],
   controllers: [DocumentosConfigController],
   providers: [DocumentosConfigService],

@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([RetencionConfiguracionEntity])
+    TypeOrmModule.forFeature([RetencionConfiguracionEntity], 'operacion')
   ],
   controllers: [RetencionConfiguracionController],
   providers: [RetencionConfiguracionService]

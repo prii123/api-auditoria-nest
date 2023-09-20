@@ -10,11 +10,15 @@ import { HallazgosModule } from './hallazgos/hallazgos.module';
 import { RetencionFuenteModule } from './impuestos/retencion-fuente/retencion-fuente.module';
 import { RetencionConfiguracionModule } from './impuestos/retencion-configuracion/retencion-configuracion.module';
 import { InformesModule } from './informes/informes.module';
+import { FuenteDocsModule } from './fuente_docs/fuente_docs.module';
+import { FuenteDocsInModule } from './fuente_in/fuente_in.module';
 
 
 @Module({
+  // BASE DE DATOS OPERACION
   imports: [
     TypeOrmModule.forRoot({
+      name: 'operacion',
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -24,6 +28,21 @@ import { InformesModule } from './informes/informes.module';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
+
+    // BASE DE DATOS FUENTE
+    TypeOrmModule.forRoot({
+      name: 'fuente',
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'fuente_docs',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: false,
+    }),
+
+
     AuthModule,
     EmpresaModule,
     UsuarioModule,
@@ -31,7 +50,9 @@ import { InformesModule } from './informes/informes.module';
     HallazgosModule,
     RetencionFuenteModule,
     RetencionConfiguracionModule,
-    InformesModule
+    InformesModule,
+    FuenteDocsModule,
+    FuenteDocsInModule
   ],
   controllers: [AppController],
   providers: [AppService],

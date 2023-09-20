@@ -14,9 +14,9 @@ import { generateHash } from '../auth/utils/handleBcrypt'
 @Injectable()
 export class UsuarioService {
   constructor(
-    @InjectRepository(UsersEntity) private usersRepo: Repository<UsersEntity>,
-    @InjectRepository(TipoUsersEntity) private tipoUsersRepo: Repository<TipoUsersEntity>,
-    @InjectRepository(FirmasEntity) private firmasRepo: Repository<FirmasEntity>
+    @InjectRepository(UsersEntity, 'operacion') private usersRepo: Repository<UsersEntity>,
+    @InjectRepository(TipoUsersEntity, 'operacion') private tipoUsersRepo: Repository<TipoUsersEntity>,
+    @InjectRepository(FirmasEntity, 'operacion') private firmasRepo: Repository<FirmasEntity>
   ) { }
 
   async create(createUsuarioDto: CreateUsuarioDto) {

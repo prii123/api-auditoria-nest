@@ -10,7 +10,7 @@ import { EmpresasEntity } from './entities/empresas.entity';
 @Injectable()
 export class EmpresaService {
 
-    constructor( @InjectRepository(EmpresasEntity) private empresaRepo: Repository<EmpresasEntity> ) { }
+    constructor( @InjectRepository(EmpresasEntity, 'operacion') private empresaRepo: Repository<EmpresasEntity> ) { }
 
 
     async create(createEmpresaDto: EmpresaDTO, usuario_registrado:number) {

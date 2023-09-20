@@ -9,7 +9,7 @@ import { UsuarioModule } from 'src/usuario/usuario.module';
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([EmpresasEntity]),
+    TypeOrmModule.forFeature([EmpresasEntity], 'operacion'),
     UsuarioModule
   ],
   controllers: [EmpresaController],

@@ -13,7 +13,7 @@ import { UsersEntity } from '../usuario/entities/usuario.entity';
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    @InjectRepository(UsersEntity) private readonly userModel: Repository<UsersEntity>,
+    @InjectRepository(UsersEntity, 'operacion') private readonly userModel: Repository<UsersEntity>,
     // @Inject('MAIL_SERVICE') private readonly clientMailService:ClientProxy
   ) { }
 

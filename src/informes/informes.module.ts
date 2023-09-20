@@ -9,7 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Informe, DocumentoEntity, TipoDocumentoEntity]),
+    TypeOrmModule.forFeature([Informe, DocumentoEntity, TipoDocumentoEntity], 'operacion'),
     UsuarioModule
   ],
   controllers: [InformesController],

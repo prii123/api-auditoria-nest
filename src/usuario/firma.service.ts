@@ -13,7 +13,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class FirmaService {
   constructor(
-    @InjectRepository(FirmasEntity) private firmasRepo: Repository<FirmasEntity>
+    @InjectRepository(FirmasEntity, 'operacion') private firmasRepo: Repository<FirmasEntity>
   ) { }
 
 

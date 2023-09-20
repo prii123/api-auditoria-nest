@@ -11,7 +11,7 @@ import { Repository } from 'typeorm';
 export class RetencionConfiguracionService {
 
   constructor(
-    @InjectRepository(RetencionConfiguracionEntity) private configReteRepo: Repository<RetencionConfiguracionEntity>
+    @InjectRepository(RetencionConfiguracionEntity, 'operacion') private configReteRepo: Repository<RetencionConfiguracionEntity>
   ) { }
 
   async create(createRetencionConfiguracionDto: CreateRetencionConfiguracionDto): Promise<RetencionConfiguracionEntity> {
