@@ -5,7 +5,6 @@ import { DocumentosService } from './documentos.service';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
 
 @ApiBearerAuth()
-@ApiTags('documentos')
 @Controller('documentos')
 export class DocumentosController {
   constructor(private readonly documentosService: DocumentosService) {}

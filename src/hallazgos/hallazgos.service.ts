@@ -23,15 +23,9 @@ export class HallazgosService {
   }
 
   async findByEmpresaidAndPeriodo(empresaId: number, periodo: string) {
-    let query = "SELECT documento.numeroDoc, hallazgoz_y_correcciones.tipodocumentoId, tipo_documentos.nombre, hallazgoz_y_correcciones.hallazgo, hallazgoz_y_correcciones.accionCorrectiva, documento.empresaId, documento.periodo, hallazgoz_y_correcciones.created_at FROM hallazgoz_y_correcciones, documento, tipo_documentos WHERE hallazgoz_y_correcciones.documentoId = documento.id AND hallazgoz_y_correcciones.tipodocumentoId = tipo_documentos.id AND documento.empresaId = "+empresaId+" AND documento.periodo = '"+periodo+"'";
+    let query = "SELECT * FROM hallazgoz_y_correcciones WHERE hallazgoz_y_correcciones.empresaId = "+empresaId+" AND hallazgoz_y_correcciones.periodo = '"+periodo+"'";
     const hallazgos = await this.hallazgosRepo.query(query)
-    // .manager
-    // .createQueryBuilder()
-    // .select('hallazgoz_y_correcciones')
-    // .from(Hallazgo, 'hallazgoz_y_correcciones')
-    // .where('hallazgoz_y_correcciones.periodo = :periodo', { periodo })
-    // .andWhere("hallazgoz_y_correcciones.empresaId = :empresaId", { empresaId })
-    // .getMany()
+
     return hallazgos;
   }
 

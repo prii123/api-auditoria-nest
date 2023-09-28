@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 't
 
 @Entity('ordenPagoCont')
 export class OrdenPagoContEntity {
+  @Column()
+  id: number;
+  
   @PrimaryGeneratedColumn()
   idOrdenPagoCont: number;
 

@@ -3,6 +3,10 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 't
 
 @Entity('conceptos')
 export class ConceptosEntity {
+
+  @Column()
+  id: number;
+
   @PrimaryGeneratedColumn()
   id_concepto: number;
 

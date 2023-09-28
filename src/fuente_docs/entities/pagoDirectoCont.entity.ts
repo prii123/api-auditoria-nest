@@ -1,34 +1,49 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-
+import { ProveedorEntity } from './proveedor.entity'; // Asegúrate de tener una entidad para 'proveedores' definida
 
 @Entity('pagoDirectoCont')
 export class PagoDirectoContEntity {
   @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ name: 'idPagoDirectoCont' })
   idPagoDirectoCont: number;
 
-  @Column()
+  @Column({ name: 'idPagoDirecto' })
   idPagoDirecto: number;
 
-  @Column()
+  @Column({ name: 'nroPagoDirecto' })
   nroPagoDirecto: number;
 
-  @Column()
+  @Column({ name: 'fechaCre' })
+  fechaCre: Date;
+
+  @Column({ name: 'fechaIni' })
+  fechaIni: Date;
+
+  @Column({ name: 'fechaPago' })
   fechaPago: Date;
 
-  @Column()
+  @Column({ name: 'idUser' })
   idUser: number;
 
   @Column()
   estado: number;
 
-  @Column()
+  @Column({ name: 'idProveedor' })
+  idProveedor: number;
+
+  @Column({ name: 'idConcepto' })
   idConcepto: number;
 
-  @Column()
+  @Column({ name: 'idFactura' })
   idFactura: number;
 
-  @Column()
+  @Column({ name: 'idCentroC' })
   idCentroC: number;
+
+  @Column({ name: 'idContrato' })
+  idContrato: number;
 
   @Column()
   documento: string;
@@ -39,15 +54,19 @@ export class PagoDirectoContEntity {
   @Column()
   descuento: number;
 
-  @Column('double')
+  @Column()
   iva: number;
 
-  @Column('double')
+  @Column({ name: 'ipoconsumo' })
   ipoconsumo: number;
 
   @Column()
   pagado: number;
 
-  @Column()
+  @Column({ name: 'id_empresa' })
   id_empresa: number;
+
+  @ManyToOne(() => ProveedorEntity)
+  @JoinColumn({ name: 'idProveedor', referencedColumnName: 'id_proveedor' })
+  proveedor: ProveedorEntity;
 }

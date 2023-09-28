@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FuenteDocsService } from './fuente_docs.service';
-import { CreateFuenteDocDto } from './dto/create-fuente_doc.dto';
-import { UpdateFuenteDocDto } from './dto/update-fuente_doc.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 
@@ -12,9 +10,9 @@ export class FuenteDocsController {
     private readonly fuenteDocsService: FuenteDocsService
     ) {}
 
-  @Get('/conceptos')
-  conceptos() {
-    return this.fuenteDocsService.conceptos();
+  @Get('/conceptos/:idEmpresa')
+  conceptos(@Param('idEmpresa') id_empresa: number) {
+    return this.fuenteDocsService.conceptos(id_empresa);
   }
 
 
@@ -23,19 +21,33 @@ export class FuenteDocsController {
     return this.fuenteDocsService.conciliarCompras();
   }
 
-  @Get('/cuentasPorPagar')
-  cuentasPorPagar() {
-    return this.fuenteDocsService.cuentasPorPagar();
+  @Get('/factura/:idEmpresa/:year/:month')
+  factura(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.factura(id_empresa, year, month);
+  }
+  @Get('/notaCVentas/:idEmpresa/:year/:month')
+  notaCVentas(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.notaCVentas(id_empresa, year, month);
+  }
+  @Get('/notaDVentas/:idEmpresa/:year/:month')
+  notaDVentas(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.notaDVentas(id_empresa, year, month);
   }
 
-  @Get('/notaCCompras')
-  notaCCompras() {
-    return this.fuenteDocsService.notaCCompras();
+
+  @Get('/cuentasPorPagar/:idEmpresa/:year/:month')
+  cuentasPorPagar(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.cuentasPorPagar(id_empresa, year, month);
   }
 
-  @Get('/notaDCompras')
-  notaDCompras() {
-    return this.fuenteDocsService.notaDCompras();
+  @Get('/notaCCompras/:idEmpresa/:year/:month')
+  notaCCompras(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.notaCCompras(id_empresa, year, month);
+  }
+
+  @Get('/notaDCompras/:idEmpresa/:year/:month')
+  notaDCompras(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.notaDCompras(id_empresa, year, month);
   }
 
   @Get('/ordenPagoCont')
@@ -43,15 +55,15 @@ export class FuenteDocsController {
     return this.fuenteDocsService.ordenPagoCont();
   }
 
-  @Get('/pagoDirectoCont')
-  pagoDirectoCont() {
-    return this.fuenteDocsService.pagoDirectoCont();
+  @Get('/pagoDirectoCont/:idEmpresa/:year/:month')
+  pagoDirectoCont(@Param('idEmpresa') id_empresa: number, @Param('year') year: number, @Param('month') month: number) {
+    return this.fuenteDocsService.pagoDirectoCont(id_empresa, year, month);
   }
 
 
-  @Get('/rCajaCont')
-  rCajaCont() {
-    return this.fuenteDocsService.rCajaCont();
+  @Get('/rCajaCont/:idEmpresa')
+  rCajaCont(@Param('idEmpresa') id_empresa: number) {
+    return this.fuenteDocsService.rCajaCont(id_empresa);
   }
 
 

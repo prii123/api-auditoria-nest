@@ -1,88 +1,109 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { ProveedorEntity } from './proveedor.entity'; // Asegúrate de tener una entidad para 'proveedores' definida
 
 @Entity('cuentasPorPagar')
 export class CuentasPorPagarEntity {
   @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ name: 'idCuentaPorPagar' })
   idCuentaPorPagar: number;
 
-  @Column()
+  @Column({ name: 'nroCuenta' })
   nroCuenta: number;
 
-  @Column()
+  @Column({ name: 'nroFactura' })
   nroFactura: string;
 
-  @Column()
+  @Column({ name: 'fechaCre' })
+  fechaCre: Date;
+
+  @Column({ name: 'fechaIni' })
   fechaIni: Date;
 
-  @Column()
+  @Column({ name: 'fechaFin' })
+  fechaFin: Date;
+
+  @Column({ name: 'idProveedor' })
+  idProveedor: number;
+
+  @Column({ name: 'idUser' })
   idUser: number;
 
-  @Column('double')
+  @Column()
   bruto: number;
 
-  @Column('double')
+  @Column({ name: '_descuento' })
   _descuento: number;
 
-  @Column('double')
+  @Column()
   descuento: number;
 
-  @Column('double')
+  @Column({ name: 'netoGv' })
   netoGv: number;
 
-  @Column('double')
+  @Column({ name: 'ipoconsumo' })
   ipoconsumo: number;
 
-  @Column('double')
+  @Column()
   iva: number;
 
-  @Column('double')
+  @Column({ name: 'totalCxP' })
   totalCxP: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column({ name: '_rrenta' })
   _rrenta: number;
 
-  @Column('double')
+  @Column({ name: 'retRenta' })
   retRenta: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column({ name: '_riva' })
   _riva: number;
 
-  @Column('double')
+  @Column({ name: 'retIva' })
   retIva: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column({ name: '_rica' })
   _rica: number;
 
-  @Column('double')
+  @Column({ name: 'retIca' })
   retIca: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column({ name: '_rcree' })
   _rcree: number;
 
-  @Column('double')
+  @Column({ name: 'retCree' })
   retCree: number;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column({ name: '_rotros' })
   _rotros: number;
 
-  @Column('double')
+  @Column({ name: 'retOtros' })
   retOtros: number;
 
-  @Column('double')
+  @Column({ name: 'retTotal' })
   retTotal: number;
 
-  @Column('double')
+  @Column({ name: 'aPagar' })
   aPagar: number;
 
-  @Column()
+  @Column({ name: 'idConcepto' })
   idConcepto: number;
 
-  @Column()
+  @Column({ name: 'idCentroC' })
   idCentroC: number;
+
+  @Column({ name: 'idContrato' })
+  idContrato: number;
 
   @Column()
   estado: number;
 
-  @Column()
+  @Column({ name: 'id_empresa' })
   id_empresa: number;
+
+  @ManyToOne(() => ProveedorEntity)
+  @JoinColumn({ name: 'idProveedor', referencedColumnName: 'id_proveedor' })
+  proveedor: ProveedorEntity;
 }
+

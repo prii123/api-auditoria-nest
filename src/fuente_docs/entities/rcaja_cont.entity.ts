@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 't
 
 @Entity('rcaja_cont')
 export class RCajaContEntity {
+  @Column()
+  id: number;
+  
   @PrimaryGeneratedColumn()
   id_rcaja_cont: number;
 

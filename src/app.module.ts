@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
+// import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EmpresaModule } from './empresa/empresa.module';
 import { UsuarioModule } from './usuario/usuario.module';
@@ -11,7 +11,7 @@ import { RetencionFuenteModule } from './impuestos/retencion-fuente/retencion-fu
 import { RetencionConfiguracionModule } from './impuestos/retencion-configuracion/retencion-configuracion.module';
 import { InformesModule } from './informes/informes.module';
 import { FuenteDocsModule } from './fuente_docs/fuente_docs.module';
-import { FuenteDocsInModule } from './fuente_in/fuente_in.module';
+
 
 
 @Module({
@@ -51,10 +51,9 @@ import { FuenteDocsInModule } from './fuente_in/fuente_in.module';
     RetencionFuenteModule,
     RetencionConfiguracionModule,
     InformesModule,
-    FuenteDocsModule,
-    FuenteDocsInModule
+    FuenteDocsModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}

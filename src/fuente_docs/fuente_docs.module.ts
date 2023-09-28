@@ -10,6 +10,9 @@ import { NotaDComprasEntity } from './entities/notaDCompras.entity';
 import { OrdenPagoContEntity } from './entities/ordenPagoCont.entity';
 import { PagoDirectoContEntity } from './entities/pagoDirectoCont.entity';
 import { RCajaContEntity } from './entities/rcaja_cont.entity';
+import { FacturaEntity } from './entities/factura.entity';
+import { NotaCVentasEntity } from './entities/notaCVentas.entity';
+import { NotaDVentasEntity } from './entities/notaDVentas.entity';
 
 @Module({
   imports:[
@@ -21,10 +24,14 @@ import { RCajaContEntity } from './entities/rcaja_cont.entity';
       NotaDComprasEntity,
       OrdenPagoContEntity,
       PagoDirectoContEntity,
-      RCajaContEntity
+      RCajaContEntity,
+      FacturaEntity,
+      NotaCVentasEntity,
+      NotaDVentasEntity
     ], 'fuente'),
   ],
   controllers: [FuenteDocsController],
-  providers: [FuenteDocsService]
+  providers: [FuenteDocsService],
+  exports: [FuenteDocsService]
 })
 export class FuenteDocsModule {}

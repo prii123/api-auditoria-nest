@@ -5,7 +5,6 @@ import { UpdateDocumentosConfigDto } from './dto/update-documentos-config.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiBearerAuth()
-@ApiTags('documentos')
 @Controller('documentos-config')
 export class DocumentosConfigController {
   constructor(private readonly documentosConfigService: DocumentosConfigService) {}
