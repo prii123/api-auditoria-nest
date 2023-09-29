@@ -7,11 +7,13 @@ import { TipoRetencionFuente } from './entities/tipo-retencion.entity';
 import { DocumentoEntity } from 'src/documentos/documento/entities/documento.entity';
 import {  TotalesRetencionFuente} from './entities/totales-retencion.entity'
 import { EmpresasEntity } from '../../empresa/entities/empresas.entity'
+import { FuenteDocsModule } from 'src/fuente_docs/fuente_docs.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([DetalleRetencionFuente, TipoRetencionFuente, 
-      DocumentoEntity, TotalesRetencionFuente, EmpresasEntity], 'operacion')
+      DocumentoEntity, TotalesRetencionFuente, EmpresasEntity], 'operacion'),
+      FuenteDocsModule
   ],
   controllers: [RetencionFuenteController],
   providers: [RetencionFuenteService]

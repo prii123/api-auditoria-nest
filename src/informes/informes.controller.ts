@@ -12,11 +12,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class InformesController {
   constructor(private readonly informesService: InformesService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Get('periodos-por-empresa:empresaId')
-  consultarPeriodos(@Param('empresaId') empresaId: number) {
-    return this.informesService.consultarPeriodosPorEmpresa(empresaId);
-  }
+
 
   @UseGuards(JwtAuthGuard)
   @Get('periodos-por-usuario')

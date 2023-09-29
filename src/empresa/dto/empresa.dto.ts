@@ -35,6 +35,11 @@ export class EmpresaDTO {
     // @Length(0-100)
     readonly autorrenta: number;
 
+    @ApiProperty()
+    // @IsNotEmpty()
+    // @Length(0-100)
+    readonly id_sadi: number;
+
     readonly creadorId : number;
 
 

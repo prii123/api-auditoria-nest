@@ -32,6 +32,9 @@ export class EmpresasEntity {
     @Column()
     creadorId: number;
 
+    @Column()
+    id_sadi: number;
+
     // @OneToMany(() => DocumentoEntity, (documento) => documento.empresa)
     // documentos: DocumentoEntity[]
 
@@ -41,5 +44,5 @@ export class EmpresasEntity {
     // @ManyToOne(() => EmpresasEntity, (empresa) => empresa.empresa)
     // empresa: EmpresasEntity;
 
-    // createdAt: Date;
+     createdAt: Date;
 }

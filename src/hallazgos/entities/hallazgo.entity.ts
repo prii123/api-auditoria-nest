@@ -10,6 +10,9 @@ export class Hallazgo {
     documentoId: string;
 
     @Column()
+    numeroDocumento: string;
+
+    @Column()
     tipodocumentoId: string;
 
     @Column()

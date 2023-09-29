@@ -6,11 +6,13 @@ import { TipoDocumentoEntity } from '../documentos/documento/entities/tipodocume
 import { Informe } from './entities/informe.entity'
 import { UsuarioModule } from 'src/usuario/usuario.module'; 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FuenteDocsModule } from 'src/fuente_docs/fuente_docs.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Informe, DocumentoEntity, TipoDocumentoEntity], 'operacion'),
-    UsuarioModule
+    UsuarioModule,
+    FuenteDocsModule
   ],
   controllers: [InformesController],
   providers: [InformesService],

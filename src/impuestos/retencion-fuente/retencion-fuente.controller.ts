@@ -8,7 +8,9 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('retencion-fuente')
 @Controller('retencion-fuente')
 export class RetencionFuenteController {
-  constructor(private readonly retencionFuenteService: RetencionFuenteService) {}
+  constructor(
+    private readonly retencionFuenteService: RetencionFuenteService
+    ) {}
 
   @Post()
   create(@Body() createRetencionFuenteDto: CreateDetalleRetencionFuenteDto) {

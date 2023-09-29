@@ -22,7 +22,7 @@ export class EmpresaService {
         // newUsers.ciudad = createEmpresaDto.ciudad;
         // newUsers.logo = createEmpresaDto.logo;
         newUsers.creadorId = usuario_registrado;
-        console.log(newUsers)
+        //console.log(newUsers)
         return this.empresaRepo.save(newUsers);
     }
 

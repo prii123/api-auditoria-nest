@@ -13,6 +13,11 @@ export class CreateHallazgoDto {
     readonly tipodocumentoId: string;
 
     @ApiProperty()
+    // @IsNotEmpty()
+    // @Length(1-100)
+    readonly numeroDocumento: string;
+
+    @ApiProperty()
     @IsNotEmpty()
     readonly hallazgo: string;
 
